@@ -1,39 +1,31 @@
-const { db } = require('./indes');
-const sequelize = require('sequelize');
-// const user = db.define('user', {
-//     id: {
-//         allowNull: false,
-//         // autoIncrement: true,
-//         primaryKey: true,
-//         type: Sequelize.INTEGER
-//     },
-//     email: {
-//         type: Sequelize.STRING,
-//         unique: true
-//     },
-//     name: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     },
-//     password: {
-//         type: Sequelize.STRING
-//     },
-//     mobile: {
-//         type: Sequelize.INTEGER,
-//         unique: true
-//     },
-//     createdAt: {
-//         allowNull: false,
-//         type: Sequelize.DATE
-//     },
-//     updatedAt: {
-//         allowNull: false,
-//         type: Sequelize.DATE
-//     }
-// }
-// );
+module.exports = (sequelize, DataTypes) => {
+    const user = sequelize.define('user', {
+        id: {
+            allowNull: false,
+            // autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
+        },
+        email: {
+            type: DataTypes.STRING,
+            unique: true
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING
+        },
+        mobile: {
+            type: DataTypes.INTEGER,
+            unique: true
+        }
+    }, {
+        tableName: 'users', // Optional: explicitly set table name
+        timestamps: true, // Optional: adds createdAt and updatedAt fields
+    }
+    );
 
-module.exports = {
-    // user
-    sequelize
+    return user;
 };

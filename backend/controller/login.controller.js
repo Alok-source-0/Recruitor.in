@@ -3,6 +3,7 @@ const fs = require("fs");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { user } = require("../models/indes");
+const KEY = process.env.KEY;
 
 async function login(username, password) {
 
@@ -16,7 +17,7 @@ async function login(username, password) {
     console.log('ERROR: Could not log in user - incorrect password');
     return false;
   }
-  const token = jwt.sign({ username: dbUser.username }, 'hjdfghsgfhjgshjgfhjsghjfghjsgf', { expiresIn: '1h' });
+  const token = jwt.sign({ username: dbUser.username }, KEY, { expiresIn: '1h' });
   return { user: dbUser, token: token };
 
 
@@ -29,7 +30,7 @@ async function register(userData) {
     const hashedPassword = await bcrypt.hash(password, 10);
     userData.password = hashedPassword;
     const newUser = await user.create(userData);
-      const token = jwt.sign({ username: newUser.username }, 'hjdfghsgfhjgshjgfhjsghjfghjsgf', { expiresIn: '1h' });
+      const token = jwt.sign({ username: newUser.username }, KEY, { expiresIn: '1h' });
       return { user: newUser, token: token };
   } catch (error) {
     console.log('ERROR: Could not register user - ', error);

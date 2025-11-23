@@ -13,6 +13,7 @@ app.use(xmlparser());
 
 
 // Routes
+// kdjksjdkjksjdoidoiwoe
 app.use('/api', require('./routes/routes'))
 
 db.sync()

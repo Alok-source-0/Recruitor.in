@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const xmlparser = require('express-xml-bodyparser');
-const multer = require('multer');
 const { db } = require('./models/indes')
 
 
@@ -14,10 +13,11 @@ app.use(xmlparser());
 
 // Routes
 // kdjksjdkjksjdoidoiwoe
-app.use('/api', require('./routes/routes'))
+app.use('/', require('./routes/routes'))
 
 db.sync()
     .then(() => {
+        console.log('Database connected successfully');
         app.listen(5000, () => console.log("listening on port 5000", 'click on http://localhost:5000'))
 
     })
